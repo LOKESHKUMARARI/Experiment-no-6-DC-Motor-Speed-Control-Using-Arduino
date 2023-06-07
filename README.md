@@ -103,6 +103,7 @@ void loop()
 ### OUTPUT:
 #WITHOUT POTENTIOMETER: 
 
+![without pot](https://github.com/LOKESHKUMARARI/Experiment-no-6-DC-Motor-Speed-Control-Using-Arduino/assets/119406110/c8730cb3-0c3a-40cb-ac5e-151b52ad3d62)
 
 
 #WITH POTENTIOMETER:   
