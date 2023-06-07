@@ -1,4 +1,5 @@
-# Experiment-no-7-DC-Motor-Speed-Control-Using-Arduino
+# Experiment-no-6-DC-Motor-Speed-Control-Using-Arduino
+## DATE 05-06-2023
 ### AIM : To control the speed and the direction of a DC motor using L293D driver ic( H- bridge)
 
 ### Components Required:
@@ -20,19 +21,94 @@ FIGURE-01 H BRIDGE CIRUCIT INTERFACE
  
 The speed of the DC motor (both directions) is controlled with the 10k potentiometer which is connected to analog channel 0 (A0) and the direction of rotation is controlled with the push button which is connected to pin 8 of the Arduino UNO board. If the button is pressed the motor will change its direction directly.
 The L293D driver has 2 VCCs: VCC1 is +5V and VCC2 is +12V (same as motor nominal voltage). Pins IN1 and IN2 are the control pins where:
-![image](https://user-images.githubusercontent.com/36288975/167763120-1421c2c5-8381-49eb-b376-03f6e1113b7a.png)
+
+
 TABLE-01 EXITATION TABLE FOR H BRIDGE 
 
 As shown in the circuit diagram we need only 3 Arduino terminal pins, pin 8 is for the push button which toggles the motor direction of rotation. Pins 9 and 10 are PWM signal outputs, at any time there is only 1 active PWM, this allows us to control the direction as well as the speed by varying the duty cycle of the PWM signal. The active PWM pin decides the motor direction of rotation (one at a time, the other output is logic 0).
 
 ### PRGORAM 
+#CODE FOR CIRCUIT WITHOUT POTENTIOMETER
+```
+#define m1 2
+#define m2 3
+#define m3 8
+#define m4 9
 
-### OUTPUT
-
-### GRAPH AND TABULATION 
 
 
+void setup()
+{
+  pinMode(m1, OUTPUT);
+  pinMode(m2, OUTPUT);
+  pinMode(m3, OUTPUT);
+  pinMode(m4, OUTPUT);
+}
+
+void loop()
+{
+ 
+  digitalWrite(m1, HIGH);
+  digitalWrite(m2, LOW);
+  digitalWrite(m3, HIGH);
+  digitalWrite(m4, LOW);
+  delay(10000);
+  
+  
+}
+
+```
 
 
-### RESULTS AND DISCUSSION 
+#CODE FOR CIRCUIT WITH POTENTIOMETER
+```
+#define m1 2
+#define m2 3
+int output;
+int pin = 6;
 
+void setup()
+{
+  pinMode(m1, OUTPUT);
+  pinMode(m2, OUTPUT);
+  Serial.begin(9600);
+}
+
+void loop()
+{
+  digitalWrite(m1, HIGH);
+  digitalWrite(m2, LOW);
+  delay(2000);
+  digitalWrite(m1, LOW);
+  delay(1000);
+
+  digitalWrite(m1, LOW);
+  digitalWrite(m2, HIGH);
+  delay(2000);
+  digitalWrite(m2, LOW);
+  delay(1000);
+  
+  output = map(analogRead(A0), 0, 1023, 0, 255);
+  Serial.println(output);
+  analogWrite(pin, output);
+  if (output>=600)
+  {
+    digitalWrite(2,HIGH);
+  }
+  else
+    digitalWrite(2, LOW);
+  delay(1000);
+}
+```
+### OUTPUT:
+#WITHOUT POTENTIOMETER: 
+
+
+
+#WITH POTENTIOMETER:   
+![with pot](https://github.com/LOKESHKUMARARI/Experiment-no-6-DC-Motor-Speed-Control-Using-Arduino/assets/119406110/18b6c27b-51a8-44ff-ad57-a4a16c9f24bd)
+
+
+
+### RESULTS 
+ To control the speed and the direction of a DC motor using L293D driven successfully
